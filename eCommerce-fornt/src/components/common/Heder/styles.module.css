@@ -1,0 +1,21 @@
+.logo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo span {
+    align-self: anchor-center;
+    cursor: pointer;
+    position: relative;
+}
+
+.logo div {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: #0dcaf0;
+    top: 1%;
+    right: 9%;
+    border-radius: 50%;
+    text-align: center;
+}
