@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import Categories from './categories/categoriesSlice'
+import Product from './product/productSlice'
 
 export const store = configureStore({
-  reducer: {Categories},
+  reducer: {Categories, Product},
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
