@@ -2,14 +2,20 @@ import styles from './styles.module.css';
 import {Container, Nav, Navbar} from 'react-bootstrap'
 import { NavLink } from 'react-router-dom';
 
+import { useAppSelector } from '@store/hooks';
+import { getCartTotalQuantity } from '@store/cart/cartSlice';
+
 const {logo} = styles
+
 const Header = () => {
+    const cartItem = useAppSelector(getCartTotalQuantity)
+
   return (
     <header className='header'>
         <div className={logo}>
             <h1>LazyLogo</h1>
             <span className="material-symbols-outlined">shopping_cart</span>
-            <div>0</div>
+            <div>{cartItem}</div>
         </div>
         {/* NavBar */}
         <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
