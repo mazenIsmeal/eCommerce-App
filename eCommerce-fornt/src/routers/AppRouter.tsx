@@ -8,6 +8,7 @@ import Categories from '@pages/Categories'
 import Login from '@pages/Login'
 import Register from '@pages/Register'
 import Error from '@pages/Error'
+import Cart from '@pages/Cart'
 
 // Router
 const router = createBrowserRouter([
@@ -19,12 +20,12 @@ const router = createBrowserRouter([
       {index: true, element: <Home /> },
       {path: 'about-us', element: <About /> },
       {path: 'categories', element: <Categories /> },
+      {path: 'cart', element: <Cart />},
       {path: 'categories', element: <Categories /> },
       {
         path: 'categories/products/:prefix', 
         element: <Products />,
         loader: ({params}) => {
-          console.log(params.prefix)
           if (
             typeof params.prefix !== "string" ||
             !/^[a-z]+$/i.test(params.prefix)

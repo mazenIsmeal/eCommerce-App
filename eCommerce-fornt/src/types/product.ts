@@ -4,6 +4,7 @@ export type TProduct = {
     prefix: string; 
     img: string;
     cat_prefix: string;
-    price: string;
-    quantity?: number
+    price: number;
+    quantity?: number;
+    max?: number
 }
