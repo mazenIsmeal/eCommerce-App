@@ -1,18 +1,22 @@
 import { Form, Button } from "react-bootstrap";
 import styles from "./styles.module.css";
+import type { TProduct } from "@customType/product";
 
 const { cartItem, product, productImg, productInfo, cartItemSelection } =
   styles;
-const CartItem = () => {
+
+  type CartItemProps = TProduct
+
+const CartItem = ({title, img, price}: CartItemProps) => {
   return (
     <div className={cartItem}>
         <div className={product}>
           <div className={productImg}>
-            <img src='../../../assets/Categorie.jpg' alt='' />
+            <img src={img} alt={title} />
           </div>
           <div className={productInfo}>
-            <h2>man</h2>
-            <h3>500 EGP</h3>
+            <h2>{title}</h2>
+            <h3>{price.toFixed(2)} EGP</h3>
             <Button
               variant="secondary"
               style={{ color: "white", width: "100px" }}
