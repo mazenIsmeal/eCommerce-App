@@ -1,6 +1,7 @@
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./style.module.css";
-const { product, productImg, maximumNotice } = styles;
+import Liks from '@assets/Liks.svg?react'
+const { product, productImg, maximumNotice, wishlist } = styles;
 
 import type { TProduct } from "@customType/product";
 import { addToCart } from "@store/cart/cartSlice";
@@ -33,6 +34,9 @@ const Product = memo(({id, title, price, img, max, quantity}: TProduct) => {
 
   return (
     <div className={product}>
+      <div className={wishlist}>
+        <Liks />
+      </div>
       <div className={productImg}>
         <img
           src={img}
