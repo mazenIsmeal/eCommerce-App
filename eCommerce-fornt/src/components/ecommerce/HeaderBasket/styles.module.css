@@ -1,0 +1,53 @@
+
+.logo {
+  display: flex;
+  justify-content: space-between;
+    position: relative;
+    align-items: center;
+}
+
+.logo span {
+    cursor: pointer;
+}
+
+.basketQuantity {
+  background-color: #0dcaf0;
+  height: 22px;
+  width: 22px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid;
+  position: absolute;
+      top: -17px;
+    right: 10px;
+  font-size: 12px;
+}
+
+.pumpCartQuantity {
+  animation: pumping 300ms ease-out;
+}
+
+@keyframes pumping {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(0.8);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.7);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.hederLeftBar {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  /* justify-content: space-between; */
+}

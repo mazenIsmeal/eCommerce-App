@@ -13,11 +13,13 @@ const Products = () => {
   const params = useParams()
   const {loading, error, records} = useAppSelector((state) => state.Product);
   const cartItem = useAppSelector((state) => state.cart.item)
+  const wishlist = useAppSelector((state) => state.wishlist.itemsId)
 
   const itmeProductQuantity = records.map(el => {
     return {
       ...el, 
       quantity: cartItem[el.id as number] || 0,
+      isLiked: wishlist.includes(el.id as number)
     }
   })
 

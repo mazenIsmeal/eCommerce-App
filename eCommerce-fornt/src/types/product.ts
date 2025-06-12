@@ -7,4 +7,5 @@ export type TProduct = {
     price: number;
     quantity?: number;
     max?: number
+    isLiked?: boolean
 }

@@ -1,39 +1,25 @@
-import styles from './styles.module.css';
+import HeaderBasket from '@components/ecommerce/HeaderBasket/HeaderBasket';
+import HeaderWislist from '@components/ecommerce/HeaderWislist/HeaderWislist';
 import {Container, Nav, Navbar} from 'react-bootstrap'
 import { NavLink } from 'react-router-dom';
 
-import { useEffect, useState } from 'react';
-import { useAppSelector } from '@store/hooks';
-import { getCartTotalQuantity } from '@store/cart/cartSlice';
-import { useNavigate } from 'react-router-dom';
+import styles from './styles.module.css'
 
-const {logo, pumpCartQuantity, basketQuantity} = styles
+const {headerLeftBar, header, headerContainer} = styles
 
 const Header = () => {
-    const navigate= useNavigate()
-    const cartItem = useAppSelector(getCartTotalQuantity)
-    const [isAnimate, setIsAnimate] = useState(false)
-    const quantityStyle = `${basketQuantity} ${
-    isAnimate ? pumpCartQuantity : ""
-  }`;
-
-    useEffect(() => {
-        if (!cartItem) {
-            return;
-        }
-        setIsAnimate(true)
-        const dubounce = setTimeout(() => {
-            setIsAnimate(false)
-        }, 300)
-        return () => clearTimeout(dubounce)
-    }, [cartItem])
+    
 
   return (
-    <header className='header'>
-        <div className={logo}>
+    <header className={header}>
+        <div className={headerContainer}>
+        <div>
             <h1>LazyLogo</h1>
-            <span className="material-symbols-outlined" onClick={() => navigate('/cart')}>shopping_cart</span>
-            <div className={quantityStyle}>{cartItem}</div>
+        </div>
+        <div className={headerLeftBar}>
+            <HeaderWislist />
+            <HeaderBasket />
+        </div>
         </div>
         {/* NavBar */}
         <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">

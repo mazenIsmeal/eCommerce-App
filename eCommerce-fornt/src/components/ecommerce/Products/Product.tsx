@@ -1,16 +1,19 @@
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./style.module.css";
 import Liks from '@assets/Liks.svg?react'
+import IsLiked from '@assets/IsLiked.svg?react'
 const { product, productImg, maximumNotice, wishlist } = styles;
 
 import type { TProduct } from "@customType/product";
 import { addToCart } from "@store/cart/cartSlice";
 import { useAppDispatch } from "@store/hooks";
+import { wishlistToggle } from "@store/wishlist/wishlistSlice";
 import { memo, useEffect, useState } from "react";
 
-const Product = memo(({id, title, price, img, max, quantity}: TProduct) => {
+const Product = memo(({id, title, price, img, max, quantity, isLiked}: TProduct) => {
   const dispatch = useAppDispatch()
   const [isBtnDisabled, setIsBtnDisabled] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const currentRemainingQuantity = (max ?? 0) - (quantity ?? 0)
   const quantityReachedToMax = currentRemainingQuantity <= 0 ? true : false
@@ -32,10 +35,15 @@ const Product = memo(({id, title, price, img, max, quantity}: TProduct) => {
     setIsBtnDisabled(true)
   }
 
+  const toggleWishList = () => {
+    setIsLoading(true)
+    dispatch(wishlistToggle(id as number)).unwrap().then(() => setIsLoading(false)).catch(() => setIsLoading(false))
+  }
+
   return (
     <div className={product}>
-      <div className={wishlist}>
-        <Liks />
+      <div className={wishlist} onClick={toggleWishList}>
+        {isLoading? <Spinner animation="border" size="sm" /> : isLiked?  <IsLiked /> : <Liks />}
       </div>
       <div className={productImg}>
         <img
