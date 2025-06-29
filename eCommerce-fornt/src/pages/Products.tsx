@@ -1,39 +1,14 @@
-import Product from "@components/ecommerce/Products/Product"
-
-import { useAppDispatch, useAppSelector } from "@store/hooks"
-import { actGetProductByCatPerfix, productCleanUp } from "@store/product/productSlice"
-import { useEffect } from "react"
-import { useParams } from "react-router-dom"
+import useProductsHooks from "@hooks/useProductsHooks"
 import Loading from "@components/feedback/Loading/Loading"
 import GridList from "@components/common/GridList/GridList"
 import Heading from "@components/Heading/Heading"
+import Product from "@components/ecommerce/Products/Product"
 
 const Products = () => {
-  const dispatch = useAppDispatch();
-  const params = useParams()
-  const {loading, error, records} = useAppSelector((state) => state.Product);
-  const cartItem = useAppSelector((state) => state.cart.item)
-  const wishlist = useAppSelector((state) => state.wishlist.itemsId)
-
-  const itmeProductQuantity = records.map(el => {
-    return {
-      ...el, 
-      quantity: cartItem[el.id as number] || 0,
-      isLiked: wishlist.includes(el.id as number)
-    }
-  })
-
-  useEffect(() => {
-    dispatch(actGetProductByCatPerfix(params.prefix as string))
-    return () => {
-      dispatch(productCleanUp())
-    }
-  }, [dispatch, params])
-
-
+  const {loading, error, itmeProductQuantity, productPrefix} = useProductsHooks()
   return (
     <div>
-      <Heading><span className="text-capitalize">{params.prefix} </span>Products</Heading>
+      <Heading title={`${productPrefix} Products`} />
       <Loading loading={loading} error={error}>
         <GridList records={itmeProductQuantity} recordItem={(record) => <Product {...record} />} />
       </Loading>

@@ -1,20 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 import wishlistToggle from "./act/actWishlistToggle";
+import actGetWishlist from "./act/actGetWishlist";
+import type { TLoading } from "@customType/shared";
+import type { TProduct } from "@customType/product";
 
 interface IWishlist {
     itemsId: number[],
-    error: null | string
+    productFullInfo: TProduct[]
+    error: null | string,
+    loading: TLoading
 }
 
 const initialState: IWishlist = {
     itemsId: [],
-    error: null
+    productFullInfo: [],
+    error: null,
+    loading: 'idle'
 }
 
 const wishlistSlice = createSlice({
     name: 'wishlist',
     initialState,
-    reducers: {},
+    reducers: {
+        productFullInfoCleanUp: (state) => {
+            state.productFullInfo = []
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(wishlistToggle.pending, (state) => {
             state.error = null
@@ -24,6 +35,7 @@ const wishlistSlice = createSlice({
                 state.itemsId.push(action.payload.id)
             } else {
                 state.itemsId = state.itemsId.filter((el) => el !== action.payload.id)
+                state.productFullInfo = state.productFullInfo.filter((el) => el.id !== action.payload.id)
             }
         })
         builder.addCase(wishlistToggle.rejected, (state, action) => {
@@ -31,8 +43,24 @@ const wishlistSlice = createSlice({
                 state.error = action.payload
             }
         })
+        // Get Wishlist
+        builder.addCase(actGetWishlist.pending, (state) => {
+            state.loading = 'pending'
+            state.error = null
+        })
+        builder.addCase(actGetWishlist.fulfilled, (state, action) => {
+            state.loading = 'succeeded'
+            state.productFullInfo = action.payload
+        })
+        builder.addCase(actGetWishlist.rejected, (state, action) => {
+            state.loading = 'failed'
+            if(action.payload && typeof action.payload ==='string') {
+                state.error = action.payload
+            }
+        })
     }
 })
 
-export {wishlistToggle}
+export {wishlistToggle, actGetWishlist}
+export const {productFullInfoCleanUp} = wishlistSlice.actions
 export default wishlistSlice.reducer

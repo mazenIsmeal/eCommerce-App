@@ -101,17 +101,12 @@
     {
       "userId": "1",
       "productId": 1,
-      "id": 1
+      "id": 7
     },
     {
       "userId": "1",
       "productId": 2,
-      "id": 5
-    },
-    {
-      "userId": "1",
-      "productId": 3,
-      "id": 6
+      "id": 9
     }
   ]
 }

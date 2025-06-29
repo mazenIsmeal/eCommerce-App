@@ -36,6 +36,9 @@ const Product = memo(({id, title, price, img, max, quantity, isLiked}: TProduct)
   }
 
   const toggleWishList = () => {
+    if (isLoading) {
+      return;
+    }
     setIsLoading(true)
     dispatch(wishlistToggle(id as number)).unwrap().then(() => setIsLoading(false)).catch(() => setIsLoading(false))
   }

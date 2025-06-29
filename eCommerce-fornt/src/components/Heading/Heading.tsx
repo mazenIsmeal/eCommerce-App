@@ -1,8 +1,9 @@
+import { memo } from "react"
 
-const Heading = ({children}: {children: React.ReactNode}) => {
+const Heading = memo(({ title}: {title: React.ReactNode}) => {
   return (
-    <h1>{children}</h1>
+    <h1>{title}</h1>
   )
-}
+})
 
 export default Heading

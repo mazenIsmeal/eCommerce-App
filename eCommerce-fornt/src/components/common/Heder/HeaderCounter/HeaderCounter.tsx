@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import WishList from '@assets/wishlist.svg?react'
-
 import styles from './styles.module.css'
-import { useAppSelector } from '@store/hooks';
 
 const {logo, pumpCartQuantity, basketQuantity, iconWrapper} = styles
 
+type HeaderCounterProps = {
+  totalQuantity: number,
+  to: string,
+  title: string,
+  svgIcon: React.ReactNode
+}
 
-const HeaderWislist = () => {
+
+const HeaderCounter = ({totalQuantity, to, svgIcon, title}: HeaderCounterProps) => {
     const navigate= useNavigate()
-    const totalQuantity = useAppSelector(state => state.wishlist.itemsId)
     const [isAnimate, setIsAnimate] = useState(false)
     const quantityStyle = `${basketQuantity} ${
     isAnimate ? pumpCartQuantity : ""
@@ -30,15 +33,16 @@ const HeaderWislist = () => {
 
   return (
     <div className={logo}>
-            <div onClick={() => navigate('/wishlist')}>
+            <div onClick={() => navigate(to)}>
               <div className={iconWrapper}>
-                <WishList  />
+                {svgIcon}
               </div>
-              {totalQuantity.length > 0 && <div className={quantityStyle}>{totalQuantity.length}</div>}
+              {totalQuantity > 0 && <div className={quantityStyle}>{totalQuantity}</div>}
                 
             </div>
+            <h3>{title}</h3>
         </div>
   )
 }
 
-export default HeaderWislist
+export default HeaderCounter

@@ -1,14 +1,18 @@
-import HeaderBasket from '@components/ecommerce/HeaderBasket/HeaderBasket';
-import HeaderWislist from '@components/ecommerce/HeaderWislist/HeaderWislist';
 import {Container, Nav, Navbar} from 'react-bootstrap'
 import { NavLink } from 'react-router-dom';
 
 import styles from './styles.module.css'
+import HeaderCounter from './HeaderCounter/HeaderCounter';
+import { useAppSelector } from '@store/hooks';
+import { getCartTotalQuantity } from '@store/cart/cartSlice';
+import WishList from '@assets/wishlist.svg?react'
+import CartItems from '@assets/CartItems.svg?react'
 
-const {headerLeftBar, header, headerContainer} = styles
+const {headerLeftBar, header, headerContainer, logoCart} = styles
 
 const Header = () => {
-    
+    const cartItem = useAppSelector(getCartTotalQuantity)
+    const wishlistQuantity = useAppSelector(state => state.wishlist.itemsId.length)
 
   return (
     <header className={header}>
@@ -17,8 +21,10 @@ const Header = () => {
             <h1>LazyLogo</h1>
         </div>
         <div className={headerLeftBar}>
-            <HeaderWislist />
-            <HeaderBasket />
+            {/* <HeaderWislist />
+            <HeaderBasket /> */}
+            <HeaderCounter totalQuantity={wishlistQuantity} svgIcon={<WishList title='cart' />} title='Wishlist' to='wishlist' />
+            <HeaderCounter totalQuantity={cartItem} svgIcon={<CartItems className={logoCart} title='cart' />} title='cart' to='cart' />
         </div>
         </div>
         {/* NavBar */}
