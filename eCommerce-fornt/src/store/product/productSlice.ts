@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import actGetProductByCatPerfix from "./act/actGetProductByCatPerfix";
-import type { TLoading } from "@customType/shared";
-import type { TProduct } from "@customType/product";
+import { type TProduct, type TLoading, isString } from "@types";
 
 interface TProducts {
     records: TProduct[],
@@ -34,7 +33,7 @@ const productSlice = createSlice({
         })
         builder.addCase(actGetProductByCatPerfix.rejected, (state, action) => {
             state.loading = 'failed'
-            if(action.payload && typeof action.payload ==='string') {
+            if(isString(action.payload)) {
                 state.error = action.payload
             }
         })

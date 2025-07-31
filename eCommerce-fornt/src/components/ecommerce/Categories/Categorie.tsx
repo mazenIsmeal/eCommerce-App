@@ -1,7 +1,7 @@
 import styles from "./style.module.css";
 const { category, categoryImg, categoryTitle } = styles;
 import { Link } from "react-router-dom";
-import type { TCategory } from "@customType/category";
+import type { TCategory } from "@types";
 
 
 const Categorie = ({title, img, prefix}: TCategory) => {

@@ -4,7 +4,7 @@ import Liks from '@assets/Liks.svg?react'
 import IsLiked from '@assets/IsLiked.svg?react'
 const { product, productImg, maximumNotice, wishlist } = styles;
 
-import type { TProduct } from "@customType/product";
+import type { TProduct } from "@types";
 import { addToCart } from "@store/cart/cartSlice";
 import { useAppDispatch } from "@store/hooks";
 import { wishlistToggle } from "@store/wishlist/wishlistSlice";

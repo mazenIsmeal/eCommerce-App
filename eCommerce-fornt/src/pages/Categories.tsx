@@ -10,8 +10,8 @@ const Categories = () => {
   return (
     <div>
       <Heading title='Categories' />
-      <Loading loading={loading} error={error}>
-        <GridList records={records} recordItem={(record) => <Categorie {...record} />} />
+      <Loading loading={loading} error={error} type='category'>
+        <GridList records={records} recordItem={(record) => <Categorie {...record} />} emptyMessage='no categories here' />
       </Loading>
       
     </div>

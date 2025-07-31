@@ -4,6 +4,7 @@ import CartSubtotalPrice from "@components/ecommerce/CartSubtotalPrice/CartSubto
 import Heading from "@components/Heading/Heading"
 import CartItemsList from "@components/ecommerce/CartItemsList/CartItemsList"
 import Loading from "@components/feedback/Loading/Loading"
+import LottieHandler from "@components/feedback/LottieHandler/LottieHandler"
 
 const Cart = () => {
   const {loading, error, products, changeHandlerAction, removeItemHandler} = useCartHooks()
@@ -11,12 +12,12 @@ const Cart = () => {
   return (
     <>
         <Heading title='Cart' />
-        <Loading error={error} loading={loading}>
+        <Loading error={error} loading={loading} type="cart">
           {
           products.length ? <>
             <CartItemsList products={products} changeHandlerAction={changeHandlerAction} removeItemHandler={removeItemHandler} />
             <CartSubtotalPrice products={products} />
-          </> : 'Your Cart is Empty'
+          </> : <LottieHandler type='empty' message='Your cart is empty' />
           }
         </Loading>
     </>
