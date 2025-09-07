@@ -97,5 +97,14 @@
       "max": 2
     }
   ],
-  "wishlist": []
+  "wishlist": [],
+  "users": [
+    {
+      "email": "mazen@gmail.com",
+      "password": "$2a$10$OmqQBBXPXQhOTgbgPF143evKHAkW7d7cKc2STLIxPKRqWC11GjdmW",
+      "FirstName": "mazen",
+      "LastName": "ashraf",
+      "id": 1
+    }
+  ]
 }
